@@ -47,16 +47,17 @@ $user = $_SESSION["username"];
 
 <script>
 function loadBooks() {
-    var xhr = new XMLHttpRequest();
+    const xhr = new XMLHttpRequest();
     xhr.open("GET", "../get_books.php", true);
     xhr.onload = function() {
-        var books = JSON.parse(xhr.responseText);
-        document.getElementById("status").textContent = "Loaded " + books.length + " books.";
-        for (var i = 0; i < books.length; i++) {
-            var b = books[i];
-            document.getElementById("booksTable").innerHTML +=
-                "<tr><td>" + b.id + "</td><td>" + b.title + "</td><td>" + b.author + "</td><td>" + b.category + "</td></tr>";
+        const books = JSON.parse(xhr.responseText);
+        let rows = "<tr><th>ID</th><th>Title</th><th>Author</th><th>Category</th></tr>";
+        for (let i = 0; i < books.length; i++) {
+            const b = books[i];
+            rows += `<tr><td>${b.id}</td><td>${b.title}</td><td>${b.author}</td><td>${b.category}</td></tr>`;
         }
+        document.getElementById("booksTable").innerHTML = rows;
+        document.getElementById("status").textContent = `Loaded ${books.length} books.`;
     };
     xhr.send();
 }
