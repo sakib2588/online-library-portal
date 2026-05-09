@@ -13,26 +13,26 @@
     <!-- Client side JavaScript validation (3+ rules) -->
     <script>
     function validateForm() {
-        var name     = document.forms["regForm"]["name"].value;
-        var email    = document.forms["regForm"]["email"].value;
-        var username = document.forms["regForm"]["username"].value;
-        var pass     = document.forms["regForm"]["password"].value;
-        var conf     = document.forms["regForm"]["confirm"].value;
+        var name     = document.getElementById("name").value;
+        var email    = document.getElementById("email").value;
+        var username = document.getElementById("username").value;
+        var pass     = document.getElementById("password").value;
+        var conf     = document.getElementById("confirm").value;
 
         // Rule 1: no field empty
         if (name == "" || email == "" || username == "" || pass == "" || conf == "") {
             alert("All fields are required.");
-            return false;
+            return false; //here return false means "stop form submission"
         }
         // Rule 2: password length >= 6
         if (pass.length < 6) {
             alert("Password must be at least 6 characters long.");
-            return false;
+            return false; //stop form submission
         }
         // Rule 3: passwords must match
         if (pass != conf) {
             alert("Password and Confirm Password do not match.");
-            return false;
+            return false; //stop form submission
         }
         return true;
     }
@@ -49,7 +49,7 @@ if (isset($errorList) && $errorList != "") {
 }
 ?>
 
-<form name="regForm"
+<form 
       action="../controllers/RegisterController.php"
       method="POST"
       enctype="multipart/form-data"
@@ -58,23 +58,23 @@ if (isset($errorList) && $errorList != "") {
     <table>
         <tr>
             <td>Full Name:</td>
-            <td><input type="text" name="name"></td>
+            <td><input type="text" id="name" name="name"></td>
         </tr>
         <tr>
             <td>Email:</td>
-            <td><input type="text" name="email"></td>
+            <td><input type="text" id="email" name="email"></td>
         </tr>
         <tr>
             <td>Username:</td>
-            <td><input type="text" name="username"></td>
+            <td><input type="text" id="username" name="username"></td>
         </tr>
         <tr>
             <td>Password:</td>
-            <td><input type="password" name="password"></td>
+            <td><input type="password" id="password" name="password"></td>
         </tr>
         <tr>
             <td>Confirm Password:</td>
-            <td><input type="password" name="confirm"></td>
+            <td><input type="password" id="confirm" name="confirm"></td>
         </tr>
         <tr>
             <td>Member Photo (JPG/PNG, max 2MB):</td>

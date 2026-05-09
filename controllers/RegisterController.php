@@ -91,8 +91,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // If we get here, something failed -> show the form again with errors
-    $errorList = $errors;
-    include __DIR__ . "/../views/register.php";
+    $errorList = $errors; 
+    include __DIR__ . "/../views/register.php";// this will happen if the validation fails, and we want to show the form again with the error messages. 
+    // The $errorList variable will be used in the view to display the errors to the user.
     exit;
 
 } 
