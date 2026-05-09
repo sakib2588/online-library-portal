@@ -41,25 +41,30 @@ $user = $_SESSION["username"];
 <button onclick="loadBooks()">Load Books</button>
 <p id="status"></p>
 
-<table id="booksTable">
-    <tr><th>ID</th><th>Title</th><th>Author</th><th>Category</th></tr>
+<table>
+    <thead> // Table header for book list
+        <tr><th>ID</th><th>Title</th><th>Author</th><th>Category</th></tr>
+    </thead>
+    <tbody id="booksTable"></tbody> // Table body where book rows will be inserted by JavaScript
 </table>
 
 <script>
 function loadBooks() {
-    const xhr = new XMLHttpRequest();
-    xhr.open("GET", "../get_books.php", true);
+    const xhr = new XMLHttpRequest(); // Create AJAX request
+    xhr.open("GET", "../get_books.php", true); // Request book data from server
     xhr.onload = function() {
-        const books = JSON.parse(xhr.responseText);
-        let rows = "<tr><th>ID</th><th>Title</th><th>Author</th><th>Category</th></tr>";
+        const books = JSON.parse(xhr.responseText); // Parse JSON response
+        let rows = ""; // Build HTML rows for each book
         for (let i = 0; i < books.length; i++) {
             const b = books[i];
-            rows += `<tr><td>${b.id}</td><td>${b.title}</td><td>${b.author}</td><td>${b.category}</td></tr>`;
+            rows += `<tr><td>${b.id}</td><td>${b.title}</td><td>${b.author}</td><td>${b.category}</td></tr>`; 
+            // Append book data to rows string
         }
-        document.getElementById("booksTable").innerHTML = rows;
-        document.getElementById("status").textContent = `Loaded ${books.length} books.`;
+        document.getElementById("booksTable").innerHTML = rows; // Insert rows into table body
+        //document.getElementById("status").textContent = `Loaded ${books.length} books.`; 
+        // Update status message
     };
-    xhr.send();
+    xhr.send(); // Send AJAX request
 }
 </script>
 
