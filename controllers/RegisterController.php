@@ -82,6 +82,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             addMember(
                 $name, $email, $username, $password, $_FILES["photo"]["tmp_name"],$filename
             );
+            // this line is connected to login.php and process_login.php because after successful registration, we want to redirect the user 
+            // to the login page with a success message.
             header("Location: ../views/login.php?registered=1"); //this header is for redirection to the login page with a query parameter
             //  indicating successful registration
             exit;

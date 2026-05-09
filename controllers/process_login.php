@@ -36,11 +36,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // with that name and you can access it using $_COOKIE["lib_user1"] or $_COOKIE["lib_user2"] depending on 
             // what you set.
         }
-
+        
+        //his line is connected to dashboard.php because after successful login, we want to redirect the user to the dashboard page.
         header("Location: ../views/dashboard.php"); // this headers is for redirection to the dashboard page after successful login
         exit;
 
     } else {
+        // this line is connected to login.php and it redirects back to the login page with an error query parameter if the credentials are 
+        // invalid
         header("Location: ../views/login.php?error=1"); // this header is for redirection back to the login page with an
         //  error query parameter if the credentials are invalid
         exit;
