@@ -49,20 +49,15 @@ $user = $_SESSION["username"];
 function loadBooks() {
     var xhr = new XMLHttpRequest();
     xhr.open("GET", "../get_books.php", true);
-
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            var books = JSON.parse(xhr.responseText);
-            var table = document.getElementById("booksTable");
-            document.getElementById("status").textContent = "Loaded " + books.length + " books.";
-            for (var i = 0; i < books.length; i++) {
-                var b = books[i];
-                table.innerHTML += "<tr><td>" + b.id + "</td><td>" + b.title +
-                                   "</td><td>" + b.author + "</td><td>" + b.category + "</td></tr>";
-            }
+    xhr.onload = function() {
+        var books = JSON.parse(xhr.responseText);
+        document.getElementById("status").textContent = "Loaded " + books.length + " books.";
+        for (var i = 0; i < books.length; i++) {
+            var b = books[i];
+            document.getElementById("booksTable").innerHTML +=
+                "<tr><td>" + b.id + "</td><td>" + b.title + "</td><td>" + b.author + "</td><td>" + b.category + "</td></tr>";
         }
     };
-
     xhr.send();
 }
 </script>
